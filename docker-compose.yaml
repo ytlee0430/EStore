@@ -1,0 +1,18 @@
+version: '3'
+services:                           
+  nginx:
+    image: nginx:latest
+    restart: always  
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    ports:
+      - 7777:80
+    depends_on:
+      - nodejs
+  nodejs:
+    build: ./node
+    ports:
+      - 8080:3000
+    volumes:
+      - ./node/www:/usr/src/app/www
+      - ./node/server.js:/usr/src/app/server.js
